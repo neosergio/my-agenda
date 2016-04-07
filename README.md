@@ -12,21 +12,24 @@ Building an REST API with Django using Vagrant and Puppet or standalone on Ubunt
 5. Activate the virtualenv with the following command
 + `source (virtualenv)/bin/activate`
 6. Run the command:
-`pip install -r puppet/provision/modules/language/files/local.txt`
++ `pip install -r puppet/provision/modules/language/files/local.txt`
 7. Verify all the packages with yolk:
-`yolk -l`
++ `yolk -l`
 8. Modify manage.py like 'Run the application' section
 
-# Without vagrant and without mysql
+# Without vagrant and without mysql - using sqlite
 
-+ You don't need install mysql server, so using steps from above section, just run the command:
-`pip install -r puppet/provision/modules/language/files/local_sqlite3.txt`
-
-+ You can also use pip freeze instead yolk to verify all packages:
-`pip freeze`
-
-+ You don't need to modify manage.py like 'Run the application' section, you can use just virtualenvwrapper postactivate:
-`export DJANGO_SETTINGS_MODULE=agenda.settings.local_sqlite3`
+1. Install python and pip
+2. Install virtualenv and virtualenvwrapper
+3. Create a virtualenv
+4. Activate the virtualenv with the following command
++ `source (virtualenv)/bin/activate`
+5. Run the command:
++ `pip install -r puppet/provision/modules/language/files/local_sqlite3.txt`
+6. Using pip freeze instead of yolk:
++ `pip freeze`
+7. Use just virtualenvwrapper postactivate:
++ `export DJANGO_SETTINGS_MODULE=agenda.settings.local_sqlite3`
 
 # Using Vagrant
 
@@ -111,3 +114,6 @@ Copy the message result:
 
 Create super user:
 * `heroku run python manage.py createsuperuser`
+
+Restart web server
+* `heroku ps:scale web=0 && heroku ps:scale web=1`

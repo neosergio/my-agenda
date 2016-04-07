@@ -1,16 +1,16 @@
+from __future__ import unicode_literals
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 
 
+@python_2_unicode_compatible
 class Skill(models.Model):
     name = models.CharField(max_length=200)
     alias = models.CharField(max_length=200, default='', blank=True)
     active = models.BooleanField(default=True)
 
-    def __str__(self):  # __unicode__ on Python 2
+    def __str__(self):
         return self.name
-
-    def __unicode__(self):
-        return '%s' % self.name
 
     class Meta:
         ordering = ('name',)

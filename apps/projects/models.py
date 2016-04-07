@@ -1,8 +1,11 @@
+from __future__ import unicode_literals
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 
 from apps.companies.models import Company
 
 
+@python_2_unicode_compatible
 class Project(models.Model):
     name = models.CharField(max_length=200)
     client = models.ForeignKey(Company, related_name='companies', related_query_name='company')
@@ -10,11 +13,8 @@ class Project(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 
-    def __str__(self):  # __unicode__ on Python 2
+    def __str__(self):
         return self.name
-
-    def __unicode__(self):
-        return '%s' % self.name
 
     class Meta:
         ordering = ('created_at',)
